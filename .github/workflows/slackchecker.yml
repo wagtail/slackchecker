@@ -2,12 +2,12 @@ name: Slack checker
 
 on:
   schedule:
-    - cron: "10 * * * *"
+    - cron: "45 * * * *"
 
   workflow_dispatch:
 
 jobs:
-  nightly-test:
+  slack-checker:
     # Cannot check the existence of secrets, so limiting to repository name to prevent all forks to run nightly.
     # See: https://github.com/actions/runner/issues/520
     if: ${{ github.repository == 'wagtail/slackchecker' }}
