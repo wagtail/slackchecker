@@ -1,0 +1,31 @@
+name: Slack checker
+
+on:
+  schedule:
+    - cron: "10 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  nightly-test:
+    # Cannot check the existence of secrets, so limiting to repository name to prevent all forks to run nightly.
+    # See: https://github.com/actions/runner/issues/520
+    if: ${{ github.repository == 'wagtail/slackchecker' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          pip install requests
+      - name: Test
+        id: test
+        continue-on-error: true
+        run: |
+          python .github/slackchecker.py
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
