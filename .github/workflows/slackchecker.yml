@@ -29,3 +29,4 @@ jobs:
           python .github/slackchecker.py
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: gautamkrishnar/keepalive-workflow@v1
