@@ -3,9 +3,7 @@ import requests
 
 r = requests.head("https://wagtail.org/slack", headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"}, allow_redirects=True)
 if r.url.startswith('https://wagtailcms.slack.com/join/shared_invite/'):
-    print("Slack invitation link is OK. Status code: %s" % r.status_code)
-    print("Response body:")
-    print(r.text)
+    print("Slack invitation link is OK")
 else:
     print("Slack invitation link has expired")
 
